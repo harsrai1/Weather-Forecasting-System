@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+    <script>
+      const firebaseConfig = {
+    apiKey: "AIzaSyDpItWFi-Ze9enBflzajHd2KMwcTqzYkmQ",
+    authDomain: "weather-forecasting-992b7.firebaseapp.com",
+    projectId: "weather-forecasting-992b7",
+    storageBucket: "weather-forecasting-992b7.appspot.com",
+    messagingSenderId: "736392587683",
+    appId: "1:736392587683:web:dee708619d507df4ae1216",
+    measurementId: "G-1X243CKT8W"
+  };
+
+        firebase.initializeApp(firebaseConfig);
+
+        function registerUser() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var passwordConfirm = document.getElementById("password-confirm").value;
+
+            if (password !== passwordConfirm) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(function(user) {
+                    
+                    alert("Registration successful!");
+                })
+                .catch(function(error) {
+                   
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert("Error: " + errorMessage);
+                });
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            
+        background-color: #7EA2A7;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .cancelbtn {
+            width: 49%;
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .signupbtn {
+            width: 49%;
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .signupbtn:hover,
+        .cancelbtn:hover {
+            opacity: 0.8;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        a {
+            color: dodgerblue;
+        }
+        .weather-heading{
+        
+        color: whitesmoke;
+    }
+    #heading{
+        height: 32px;
+        background-color: #333;
+    }
+    </style>
+</head>
+<body>
+    <div id="heading"> <h1 class="weather-heading">WeatherWise</h1></div>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+    
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" name="email" id="email" required>
+    
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+    
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="psw-repeat" id="password-confirm" required>
+    
+        <label>
+          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+        </label>
+    
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+    
+        <div class="clearfix">
+          <button type="button" class="cancelbtn">Cancel</button>
+          <button type="button" onclick="registerUser()" class="signupbtn">Sign Up</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherWise</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+      
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('background1.jpg');.
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            background-color: inherit;
+            margin: 0;
+            padding: 14px 16px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px;
+        }
+
+        #header h1 {
+            font-size: 36px;
+           margin: 25px;
+        }
+
+        .tagline {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        #pcontent{
+            text-align: justify;
+            font-size: 20px;
+        }
+
+       
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-button,
+        .login-button {
+            background-color: #04AA6D;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .signup-button:hover,
+        .login-button:hover {
+            background-color: #45BF91;
+        }
+
+        
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed; 
+            bottom: 0; 
+            width: 100%;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">About</button>
+            <div class="dropdown-content">
+                <a href="#link1">Support</a>
+                <a href="#link2">Help</a>
+                <a href="#link3">Contact</a>
+            </div>
+            
+        </div>
+        <a href="feedback.html">feedback</a>
+    </div>
+
+  
+    <header>
+        <div id="header"><h1>Your Weather Forecast Hub</h1></div>
+        <p class="tagline">Stay Informed About Weather Conditions</p>
+        <p id="pcontent">Experience the power of accurate weather forecasting with us. Our weather forecasts provide you with up-to-the-minute updates on current conditions and detailed forecasts for the days ahead. Whether you're planning your day, a weekend getaway, or preparing for outdoor activities, trust us to keep you informed. With real-time data and expert analysis, you can make informed decisions and stay one step ahead of the elements. Explore our weather maps, check the forecast, and stay prepared for whatever Mother Nature has in store.</p>
+    </header>
+
+    
+     <div class="buttons">
+        <a href="signup.html"><button class="signup-button">Sign Up</button></a>
+        <a href="login.html"><button class="login-button">Log In</button></a>
+    </div>
+
+    
+
+   
+
+ 
+    <div class="footer">
+        <h2>Contact Information</h2>
+        <div class="contact-info">
+            <p>Email: WeatherWise.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+            <p>Address: Bharati vidyapeeth, Pune, India</p>
+        </div>
+        <p>&copy; 2023 Your WeatherWise </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherWise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 id="head1">WeatherWise</h1>
+    <div class="background"></div>
+    <div class="weather-container">
+        <h1>Weather Forecast</h1>
+        <div class="input-container">
+            <input type="text" id="cityInput" placeholder="Enter city name">
+            <button id="getWeatherBtn">Get Weather</button>
+        </div>
+        <div class="weather-info" id="weatherInfo">
+          
+        </div>
+        <div class="forecast-container">
+            <h2>5-Day Forecast</h2>
+            <div class="forecast-info" id="forecastInfo">
+               
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = '0cb3f8dee58f809a38f00c25573fb9e2'; 
+
+        const cityInput = document.getElementById('cityInput');
+        const getWeatherBtn = document.getElementById('getWeatherBtn');
+        const weatherInfo = document.getElementById('weatherInfo');
+        const forecastInfo = document.getElementById('forecastInfo'); 
+
+        getWeatherBtn.addEventListener('click', () => {
+            const city = cityInput.value;
+
+            if (city) {
+                const currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+                fetch(currentApiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.cod === 200) {
+                            const weather = data.weather[0].main.toLowerCase();
+                            updateBackground(weather); 
+                            
+                           
+                            displayCurrentWeather(data);
+
+                           
+                            get5DayForecast(city);
+                        } else {
+                            weatherInfo.innerHTML = `<p>Error: ${data.message}</p>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching current weather data:', error);
+                        weatherInfo.innerHTML = `<p>Error fetching weather data. Please try again later.</p>`;
+                    });
+            } else {
+                weatherInfo.innerHTML = `<p>Please enter a valid city name.</p>`;
+            }
+        });
+
+        function displayCurrentWeather(data) {
+            const temperature = data.main.temp;
+            const weatherDescription = data.weather[0].description;
+            const windSpeed = data.wind.speed;
+            const humidity = data.main.humidity;
+
+            weatherInfo.innerHTML = `
+                <h2>Today's Weather</h2>
+                <p>Temperature: ${temperature}°C</p>
+                <p>Weather: ${weatherDescription}</p>
+                <p>Wind Speed: ${windSpeed} m/s</p>
+                <p>Humidity: ${humidity}%</p>
+            `;
+        }
+
+        function get5DayForecast(city) {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cod === '200') {
+                        const forecasts = data.list.filter(item => item.dt_txt.includes('12:00:00'));
+
+                        forecastInfo.innerHTML = ''; 
+
+                        forecasts.forEach(forecast => {
+                            const date = new Date(forecast.dt * 1000);
+                            const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+                            const temperature = forecast.main.temp;
+                            const weatherDescription = forecast.weather[0].description;
+
+                            const forecastItem = document.createElement('div');
+                            forecastItem.classList.add('forecast-item');
+                            forecastItem.innerHTML = `
+                                <p>${day}</p>
+                                <p>Temperature: ${temperature}°C</p>
+                                <p>Weather: ${weatherDescription}</p>
+                            `;
+
+                            forecastInfo.appendChild(forecastItem);
+                        });
+                    } else {
+                        console.error('Error fetching 5-day forecast data:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching 5-day forecast data:', error);
+                });
+        }
+
+        function updateBackground(weather) {
+            const backgroundElement = document.querySelector('.background');
+
+            backgroundElement.classList.remove('cloudy', 'sunny');
+
+            if (weather.includes('cloud')) {
+                backgroundElement.classList.add('cloudy');
+            } else if (weather.includes('sun') || weather.includes('clear')) {
+                backgroundElement.classList.add('sunny');
+            }
+        }
+    </script>
+</body>
+</html>
